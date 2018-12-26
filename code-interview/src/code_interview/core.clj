@@ -1,6 +1,7 @@
-(ns code-interview.core)
+(ns code-interview.core
+  (:require
+    [clojure.spec.alpha :as s]
+    [expound.alpha :as expound]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+
+(alter-var-root #'s/*explain-out* (constantly expound/printer))

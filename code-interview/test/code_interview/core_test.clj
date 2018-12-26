@@ -1,7 +1,13 @@
 (ns code-interview.core-test
-  (:require [clojure.test :refer :all]
-            [code-interview.core :refer :all]))
+  (:require
+    [clojure.spec.alpha :as s]
+    [clojure.test :refer :all]
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+    [code-interview.core :refer :all]
+
+    [orchestra.spec.test :as st]))
+
+
+(s/check-asserts true)
+
+(st/instrument)
