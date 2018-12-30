@@ -4,7 +4,7 @@
     [clojure.test :refer :all]
     [clojure.test.check.clojure-test :refer [defspec]]
     [clojure.test.check.generators :as gen]
-    [com.gfredericks.test.chuck.clojure-test :refer [for-all]]
+    [com.gfredericks.test.chuck.clojure-test :refer [for-all checking]]
 
     [code-interview.arrays :as arrays]
 
@@ -20,10 +20,10 @@
 
 
 (deftest unique-character-test
-  (is (= true (arrays/unique-character-java? "a")))
-  (is (= false (arrays/unique-character-java? "aa")))
-  (is (= true (arrays/unique-character-clj? "abc")))
-  (is (= false (arrays/unique-character-clj? "aa"))))
+  (checking "with well known examples" 100
+    [[output input] (gen/elements [[true "a"] [false "aa"] [true "abc"]])]
+    (is (= output (arrays/unique-character-java? input)))
+    (is (= output (arrays/unique-character-clj? input)))))
 
 
 (defspec unique-character-same-result-different-implementation 100
