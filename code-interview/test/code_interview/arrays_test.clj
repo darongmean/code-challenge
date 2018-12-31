@@ -20,6 +20,10 @@
 
 
 (deftest unique-character-test
+  (checking "output shape" 100
+    [x (gen/vector gen/char-alpha)]
+    (is (s/valid? boolean? (arrays/unique-character-java? x))))
+
   (checking "with well known examples" 100
     [[output input] (gen/elements [[true "a"] [false "aa"] [true "abc"]])]
     (is (= output (arrays/unique-character-java? input)))
