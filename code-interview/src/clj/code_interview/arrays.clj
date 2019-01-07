@@ -46,3 +46,27 @@
 (s/fdef urlify
   :args (s/cat :st string? :l integer?)
   :ret string?)
+
+
+(defn palindrome? [char-occurrences]
+  (let [odd-count (count (remove even? char-occurrences))]
+    (contains? #{0 1} odd-count)))
+
+(defn format-palindrome-input [st]
+  (let [lower-case (fnil #(.toLowerCase %) "")]
+    (-> st
+        (lower-case)
+        (.replace " " ""))))
+
+(defn char-counts [st]
+  (-> st
+      (frequencies)
+      (vals)))
+
+(defn permutation-palindrome? [st]
+  (let [st' (format-palindrome-input st)]
+    (palindrome? (char-counts st'))))
+
+(s/fdef permutation-palindrome?
+  :args (s/cat :st string?)
+  :ret boolean?)
