@@ -72,3 +72,22 @@
                                   [true nil]
                                   [false "abc"]])]
     (is (= expected (arrays/permutation-palindrome? st)))))
+
+
+;;; There are three types of edits that can be performed on strings:
+;;; insert a character, remove a character, or replace a character.
+;;; Given two strings, write a function to check if they are one edit (or zero edits) away.
+
+
+(deftest one-away?-test
+  (checking "with well known examples" 100
+    [[expected s1 s2] (gen/elements [[false "s" "pales"]
+                                     [false "pales" "s"]
+                                     [false "pales" "pbcdst"]
+                                     [false "pales" "baket"]
+                                     [false "pale" "bake"]
+                                     [true "pale" "ple"]
+                                     [true "pales" "pale"]
+                                     [true "pale" "bale"]
+                                     [true "abcb" "adcb"]])]
+    (is (= expected (arrays/one-away? s1 s2)))))
