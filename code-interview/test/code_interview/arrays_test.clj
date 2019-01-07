@@ -27,11 +27,10 @@
   (checking "with well known examples" 100
     [[output input] (gen/elements [[true "a"] [false "aa"] [true "abc"]])]
     (is (= output (arrays/unique-character-java? input)))
-    (is (= output (arrays/unique-character-clj? input)))))
+    (is (= output (arrays/unique-character-clj? input))))
 
-
-(defspec unique-character-same-result-different-implementation 100
-  (for-all [x (gen/vector gen/char-alpha)]
+  (checking "java and clojure style implementation are the same" 100
+    [x (gen/vector gen/char-alpha)]
     (is (= (arrays/unique-character-clj? x)
            (arrays/unique-character-java? x)))))
 
