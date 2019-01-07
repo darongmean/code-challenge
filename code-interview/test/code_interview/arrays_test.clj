@@ -90,4 +90,5 @@
                                      [true "pales" "pale"]
                                      [true "pale" "bale"]
                                      [true "abcb" "adcb"]])]
-    (is (= expected (arrays/one-away? s1 s2)))))
+    (is (= expected (arrays/one-away? s1 s2)))
+    (is (= expected (arrays/one-away2? s1 s2)))))

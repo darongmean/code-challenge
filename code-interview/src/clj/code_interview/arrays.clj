@@ -1,5 +1,6 @@
 (ns code-interview.arrays
   (:require
+    [clojure.set :as sets]
     [clojure.spec.alpha :as s]
     [clojure.string :as string])
   (:import
@@ -113,3 +114,20 @@
 (s/fdef one-away?
   :args (s/cat :s1 string? :s2 string?)
   :ret boolean?)
+
+
+(defn one-edit? [s1 s2]
+  (let [s1' (into #{} s1)
+        s2' (into #{} s2)
+        d1 (sets/difference s1' s2')
+        d2 (sets/difference s2' s1')]
+    (or (= 1 (count d1))
+        (= 1 (count d2)))))
+
+(defn one-away2? [s1 s2]
+  (let [l1 (count s1)
+        l2 (count s2)]
+    (if (contains? #{-1 0 1} (- l1 l2))
+      (one-edit? s1 s2)
+      false)))
+
