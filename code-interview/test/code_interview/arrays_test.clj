@@ -45,3 +45,16 @@
     [s2 gen/string
      s1 (gen/return (apply str ((fnil shuffle []) (seq s2))))]
     (is (arrays/permutation? s1 s2))))
+
+
+;;; Write a method to replace all spaces in a string with '%20: You may assume that the string
+;;; has sufficient space at the end to hold the additional characters,
+;;; and that you are given the "true" length of the string.
+
+
+(deftest urlify-test
+  (checking "with well known examples" 100
+    [[expected st l] (gen/elements [["Mr%20John%20Smith" "Mr John Smith      " 13]
+                                    ["" nil 0]
+                                    ["" "" 0]])]
+    (is (= expected (arrays/urlify st l)))))

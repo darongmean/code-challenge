@@ -32,3 +32,17 @@
   :args (s/cat :s1 string? :s2 string?)
   :ret boolean?)
 
+
+(defn encode [st]
+  (.replace st " " "%20"))
+
+(def substring (fnil #(.substring %1 %2 %3) ""))
+
+(defn urlify [st l]
+  (-> st
+      (substring 0 l)
+      (encode)))
+
+(s/fdef urlify
+  :args (s/cat :st string? :l integer?)
+  :ret string?)
