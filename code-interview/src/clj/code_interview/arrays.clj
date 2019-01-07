@@ -1,6 +1,13 @@
 (ns code-interview.arrays
+  (:require
+    [clojure.spec.alpha :as s]
+    [clojure.string :as string]
+    [expound.alpha :as expound])
   (:import
     [java.util HashSet]))
+
+
+(set! s/*explain-out* expound/printer)
 
 
 (defn unique-character-java? [s]
@@ -22,5 +29,10 @@
 (defn permutation?
   "Check if String s1 is a permutation of s2"
   [s1 s2]
-  (= (frequencies s1) (frequencies s2)))
+  (= (frequencies (string/lower-case s1))
+     (frequencies (string/lower-case s2))))
+
+(s/fdef permutation?
+  :args (s/cat :s1 string? :s2 string?)
+  :ret boolean?)
 

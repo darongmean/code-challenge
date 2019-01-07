@@ -40,10 +40,13 @@
 
 (deftest permutation?-test
   (checking "with well known examples" 100
-    [[expected s1 s2] (gen/elements [[true "a" "a"] [false "a" "aa"] [true "bca" "abc"]])]
+    [[expected s1 s2] (gen/elements [[true "a" "a"]
+                                     [false "a" "aa"]
+                                     [true "bca" "abc"]
+                                     [true "God" "dog"]])]
     (is (= expected (arrays/permutation? s1 s2))))
 
   (checking "with random string" 100
     [s2 gen/string
-     s1 (gen/return ((fnil shuffle []) (seq s2)))]
+     s1 (gen/return (apply str ((fnil shuffle []) (seq s2))))]
     (is (arrays/permutation? s1 s2))))
