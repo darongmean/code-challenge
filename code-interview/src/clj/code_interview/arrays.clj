@@ -131,3 +131,23 @@
       (one-edit? s1 s2)
       false)))
 
+
+(defn ->char-count-pair [[x & _ :as xss]]
+  (vector x (count xss)))
+
+(defn ->string [acc [c n]] (str acc c n))
+
+(defn compress-string' [st]
+  (->> (partition-by identity st)
+       (map ->char-count-pair)
+       (reduce ->string "")))
+
+(defn compress-string [st]
+  (let [compressed (compress-string' st)]
+    (if (< (count st) (count compressed))
+      st
+      compressed)))
+
+(s/fdef compress-string
+  :args (s/cat :st string?)
+  :ret string?)
