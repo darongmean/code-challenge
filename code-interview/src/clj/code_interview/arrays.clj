@@ -17,3 +17,10 @@
 (defn unique-character-clj? [s]
   (let [s' (set s)]
     (= (count s) (count s'))))
+
+
+(defn permutation?
+  "Check if String s1 is a permutation of s2"
+  [s1 s2]
+  (= (frequencies s1) (frequencies s2)))
+
