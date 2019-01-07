@@ -43,7 +43,8 @@
     [[expected s1 s2] (gen/elements [[true "a" "a"]
                                      [false "a" "aa"]
                                      [true "bca" "abc"]
-                                     [true "God" "dog"]])]
+                                     [true "God" "dog"]
+                                     [false "god    " "dog"]])]
     (is (= expected (arrays/permutation? s1 s2))))
 
   (checking "with random string" 100
