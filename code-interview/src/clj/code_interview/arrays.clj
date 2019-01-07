@@ -1,13 +1,9 @@
 (ns code-interview.arrays
   (:require
     [clojure.spec.alpha :as s]
-    [clojure.string :as string]
-    [expound.alpha :as expound])
+    [clojure.string :as string])
   (:import
     [java.util HashSet]))
-
-
-(set! s/*explain-out* expound/printer)
 
 
 (defn unique-character-java? [s]

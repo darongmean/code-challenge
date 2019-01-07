@@ -6,14 +6,8 @@
     [clojure.test.check.generators :as gen]
     [com.gfredericks.test.chuck.clojure-test :refer [for-all checking]]
 
-    [code-interview.arrays :as arrays]
+    [code-interview.arrays :as arrays]))
 
-    [orchestra.spec.test :as st]))
-
-
-(s/check-asserts true)
-
-(st/instrument)
 
 ;;;  Implement an algorithm to determine if a string has all unique characters.
 ;;;  What if you cannot use additional data structures?
