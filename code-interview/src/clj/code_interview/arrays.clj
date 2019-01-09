@@ -69,7 +69,7 @@
     (palindrome? (char-counts st'))))
 
 (s/fdef permutation-palindrome?
-  :args (s/cat :st string?)
+  :args (s/cat :st (s/nilable string?))
   :ret boolean?)
 
 
