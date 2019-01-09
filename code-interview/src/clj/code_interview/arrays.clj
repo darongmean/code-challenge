@@ -45,7 +45,7 @@
       (encode)))
 
 (s/fdef urlify
-  :args (s/cat :st string? :l integer?)
+  :args (s/cat :st (s/nilable string?) :l integer?)
   :ret string?)
 
 
