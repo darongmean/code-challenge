@@ -45,7 +45,7 @@
       (encode)))
 
 (s/fdef urlify
-  :args (s/cat :st string? :l integer?)
+  :args (s/cat :st (s/nilable string?) :l integer?)
   :ret string?)
 
 
@@ -69,7 +69,7 @@
     (palindrome? (char-counts st'))))
 
 (s/fdef permutation-palindrome?
-  :args (s/cat :st string?)
+  :args (s/cat :st (s/nilable string?))
   :ret boolean?)
 
 
