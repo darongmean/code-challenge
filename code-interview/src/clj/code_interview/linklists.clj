@@ -1,7 +1,7 @@
 (ns code-interview.linklists)
 
 
-(defn slow-fast-pair
+(defn- slow-fast-pair
   "The \"runner\" (or second pointer) technique is used in many linked list problems. The runner technique
   means that you iterate through the linked list with two pointers simultaneously, with one ahead of the other.
 
@@ -21,11 +21,11 @@
     (map vector slow-runner fast-runner)))
 
 
-(defn verify-palindrome [{:keys [head tail]}]
+(defn- verify-palindrome [{:keys [head tail]}]
   (every? true? (map = head tail)))
 
 
-(defn collect-head-and-tail
+(defn- collect-head-and-tail
   "Return a map with the following key:
   :head a collection of element from the start to the middle(exclude middle if the length is odd)
   :tail a collection of element from the end to the middle(include middle if the length is odd)"
@@ -43,12 +43,12 @@
       (verify-palindrome)))
 
 
-(defn steps-until-loop-collision-point [slow fast]
+(defn- steps-until-loop-collision-point [slow fast]
   (let [k (count (take-while false? (map = slow fast)))]
     [(inc k) (take (inc k) slow)]))
 
 
-(defn find-circular-point [points points-in-loop]
+(defn- find-circular-point [points points-in-loop]
   (let [k (count (take-while false? (map = points points-in-loop)))]
     (first (drop k points-in-loop))))
 
@@ -57,6 +57,5 @@
   (let [slow-walk-list (take-while (complement nil?) (iterate linkedlist head))
         fast-walk-list (take-nth 2 (drop 1 (iterate linkedlist head)))
         [step no-loop] (steps-until-loop-collision-point slow-walk-list fast-walk-list)]
-    (if (= no-loop slow-walk-list)
-      nil
+    (when-not (= no-loop slow-walk-list)
       (find-circular-point slow-walk-list (drop step slow-walk-list)))))
