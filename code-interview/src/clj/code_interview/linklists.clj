@@ -41,3 +41,22 @@
       (slow-fast-pair)
       (collect-head-and-tail)
       (verify-palindrome)))
+
+
+(defn steps-until-loop-collision-point [slow fast]
+  (let [k (count (take-while false? (map = slow fast)))]
+    [(inc k) (take (inc k) slow)]))
+
+
+(defn find-circular-point [points points-in-loop]
+  (let [k (count (take-while false? (map = points points-in-loop)))]
+    (first (drop k points-in-loop))))
+
+
+(defn circular-point [head linkedlist]
+  (let [slow-walk-list (take-while (complement nil?) (iterate linkedlist head))
+        fast-walk-list (take-nth 2 (drop 1 (iterate linkedlist head)))
+        [step no-loop] (steps-until-loop-collision-point slow-walk-list fast-walk-list)]
+    (if (= no-loop slow-walk-list)
+      nil
+      (find-circular-point slow-walk-list (drop step slow-walk-list)))))
