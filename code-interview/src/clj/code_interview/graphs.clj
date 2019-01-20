@@ -1,4 +1,6 @@
-(ns code-interview.graphs)
+(ns code-interview.graphs
+  (:import
+    [java.util Collections]))
 
 
 (defn mark-visited
@@ -55,7 +57,9 @@
        (first)))
 
 
+(defn contains-v? [^Collections coll elem]
+  (.contains coll elem))
+
+
 (defn connected? [graph elem1 elem2]
-  (->> (breath-first-search graph elem1)
-       (some #{elem2})
-       (some?)))
+  (contains-v? (breath-first-search graph elem1) elem2))
