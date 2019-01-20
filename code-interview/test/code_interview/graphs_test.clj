@@ -25,6 +25,10 @@
   (is (= [0 1 3 2 4 5] (graphs/depth-first-search directed-graph 0))))
 
 
+(deftest breath-first-search-test
+  (is (= [0 1 4 5 3 2] (graphs/breath-first-search directed-graph 0))))
+
+
 ;;; Given a directed graph, design an algorithm to find out whether there is
 ;;; a route between two nodes.
 
