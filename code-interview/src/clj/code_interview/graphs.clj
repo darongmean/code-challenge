@@ -9,48 +9,48 @@
 (defn visited? [m x] (not (contains? m x)))
 
 
-(defn- dfs-itr [{:keys [graph queue] :as m}]
-  (let [[x & xs] queue
+(defn- dfs-itr [{:keys [itr result] :as m}]
+  (let [{:keys [graph queue acc]} itr
+        [x & xs] queue
         terminate? (or (empty? graph) (empty? queue))]
     (cond
-      terminate? nil
+      terminate? {:result (or acc result)}
 
       (visited? graph x)
-      (assoc m :queue xs)
+      (assoc-in m [:itr :queue] xs)
 
       :else
       (-> m
-          (update :acc conj x)
-          (update :graph mark-visited x)
-          (assoc :queue (concat (graph x) xs))))))
+          (update-in [:itr :acc] conj x)
+          (update-in [:itr :graph] mark-visited x)
+          (assoc-in [:itr :queue] (concat (graph x) xs))))))
 
 
 (defn depth-first-search [graph elem]
-  (->> (iterate dfs-itr {:graph graph :queue [elem] :acc []})
-       (take-while (complement nil?))
-       (last)
-       (:acc)))
+  (->> (iterate dfs-itr {:itr {:graph graph :queue [elem] :acc []}})
+       (keep :result)
+       (first)))
 
 
-(defn- bfs-itr [{:keys [graph queue] :as m}]
-  (let [[x & xs] queue
+(defn- bfs-itr [{:keys [itr result] :as m}]
+  (let [{:keys [graph queue acc]} itr
+        [x & xs] queue
         terminate? (or (empty? graph) (empty? queue))]
     (cond
-      terminate? nil
+      terminate? {:result (or acc result)}
 
       (visited? graph x)
-      (assoc m :queue xs)
+      (assoc-in m [:itr :queue] xs)
 
       :else
       (-> m
-          (update :acc conj x)
-          (update :graph mark-visited x)
-          (assoc :queue (concat xs (graph x)))))))
+          (update-in [:itr :acc] conj x)
+          (update-in [:itr :graph] mark-visited x)
+          (assoc-in [:itr :queue] (concat xs (graph x)))))))
 
 
 (defn breath-first-search [graph elem]
-  (->> (iterate bfs-itr {:graph graph :queue [elem] :acc []})
-       (take-while (complement nil?))
-       (last)
-       (:acc)))
+  (->> (iterate bfs-itr {:itr {:graph graph :queue [elem] :acc []}})
+       (keep :result)
+       (first)))
 
