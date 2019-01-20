@@ -1,28 +1,28 @@
 (ns code-interview.graphs)
 
 
+(defn mark-visited
+  "Mark node \"x\" as visited by remove nodes from graph"
+  [m x] (dissoc m x))
+
+
+(defn visited? [m x] (not (contains? m x)))
+
+
 (defn- dfs-itr [{:keys [graph queue] :as m}]
-  (let [[x & xs] queue]
+  (let [[x & xs] queue
+        terminate? (or (empty? graph) (empty? queue))]
     (cond
-      (empty? graph) nil
+      terminate? nil
 
-      (empty? queue) nil
-
-      (not (contains? graph x))
-      (-> m
-          (assoc :queue xs))
-
-      (empty? (graph x))
-      (-> m
-          (update :graph dissoc x)
-          (assoc :queue xs)
-          (update :acc conj x))
+      (visited? graph x)
+      (assoc m :queue xs)
 
       :else
       (-> m
-          (update :graph dissoc x)
-          (assoc :queue (concat (graph x) xs))
-          (update :acc conj x)))))
+          (update :acc conj x)
+          (update :graph mark-visited x)
+          (assoc :queue (concat (graph x) xs))))))
 
 
 (defn depth-first-search [graph elem]
@@ -33,27 +33,19 @@
 
 
 (defn- bfs-itr [{:keys [graph queue] :as m}]
-  (let [[x & xs] queue]
+  (let [[x & xs] queue
+        terminate? (or (empty? graph) (empty? queue))]
     (cond
-      (empty? graph) nil
+      terminate? nil
 
-      (empty? queue) nil
-
-      (not (contains? graph x))
-      (-> m
-          (assoc :queue xs))
-
-      (empty? (graph x))
-      (-> m
-          (update :graph dissoc x)
-          (assoc :queue xs)
-          (update :acc conj x))
+      (visited? graph x)
+      (assoc m :queue xs)
 
       :else
       (-> m
-          (update :graph dissoc x)
-          (assoc :queue (concat xs (graph x)))
-          (update :acc conj x)))))
+          (update :acc conj x)
+          (update :graph mark-visited x)
+          (assoc :queue (concat xs (graph x)))))))
 
 
 (defn breath-first-search [graph elem]
