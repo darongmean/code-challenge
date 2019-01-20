@@ -54,3 +54,8 @@
        (keep :result)
        (first)))
 
+
+(defn connected? [graph elem1 elem2]
+  (->> (breath-first-search graph elem1)
+       (some #{elem2})
+       (some?)))
