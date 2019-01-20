@@ -1,7 +1,7 @@
 (ns code-interview.graphs)
 
 
-(defn dfs-itr [{:keys [graph queue] :as m}]
+(defn- dfs-itr [{:keys [graph queue] :as m}]
   (let [[x & xs] queue]
     (cond
       (empty? graph) nil
@@ -32,7 +32,7 @@
        (:acc)))
 
 
-(defn bfs-itr [{:keys [graph queue] :as m}]
+(defn- bfs-itr [{:keys [graph queue] :as m}]
   (let [[x & xs] queue]
     (cond
       (empty? graph) nil
