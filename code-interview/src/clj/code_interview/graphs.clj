@@ -63,3 +63,24 @@
 
 (defn connected? [graph elem1 elem2]
   (contains-v? (breath-first-search graph elem1) elem2))
+
+
+(defn build-graph [projects deps]
+  (let [g (zipmap projects (repeat []))
+        conj-vals (fn [m [k v]] (update m k conj v))]
+    (reduce conj-vals g deps)))
+
+
+(defn build-order-itr [graph {:keys [visited] :as acc} elem]
+  (let [dfs (depth-first-search graph elem)
+        dfs (remove (into #{} visited) dfs)]
+    (-> acc
+        (update :visited concat dfs)
+        (update :sorted #(concat dfs %)))))
+
+
+(defn build-order [projects deps]
+  (let [g (build-graph projects deps)]
+    (->> projects
+         (reduce (partial build-order-itr g) {:visited #{} :sorted []})
+         (:sorted))))
