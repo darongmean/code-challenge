@@ -1,12 +1,15 @@
-{:paths ["src"]
+{:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.10.2"}
         org.clojure/core.async {:mvn/version "1.3.610"}
         ;; clj-http and deps
-        clj-http/clj-http {:mvn/version "3.9.1"}
-        cheshire/cheshire {:mvn/version "5.8.1"}
-        ;; end clj-http and deps
-        com.taoensso/timbre {:mvn/version "4.10.0"}
-        expound/expound {:mvn/version "0.7.2"}}
+        clj-http/clj-http {:mvn/version "3.12.1"}
+        cheshire/cheshire {:mvn/version "5.10.0"}
+        ;; end clj-http
+        ;; timbre and deps
+        com.taoensso/timbre {:mvn/version "5.1.2"}
+        ch.qos.logback/logback-classic {:mvn/version "1.2.3"}
+        ;; end timbre
+        expound/expound {:mvn/version "0.8.9"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.732"}
                                orchestra/orchestra {:mvn/version "2021.01.01-1"}
