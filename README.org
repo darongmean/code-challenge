@@ -2,29 +2,33 @@
 
 What's better to kill time?
 
-* TODO
- - read more about queue theory and feedback system?
- - learn more about graph theory
- - learn more about approximation algorithm and NP problem
- - learn more about logic programming and constraint programming
- - learn more about data structure
- - learn more about functions in standard library of clojure: reductions, iterate, transducer, monoid
+=TODO=
+- read more about queue theory and feedback system?
+- learn more about graph theory
+- learn more about approximation algorithm and NP problem
+- learn more about logic programming and constraint programming
+- learn more about data structure
+- learn more about functions in standard library of clojure: reductions, iterate, transducer, monoid
+- learn more about function combinators
 
 * clojure.zip
-  - http://arnebrasseur.net/talks/2018-clojure-zip-denver
-  - https://www.youtube.com/watch?v=5Nm56YvTKZY
-  - https://www.ibm.com/developerworks/library/j-treevisit/j-treevisit-pdf.pdf
-  - https://thomas-sojka.tech/how-to-grow-a-tree.html
-  - https://blog.jakubholy.net/2019/briefly-internal-structure-of-clojure-zippers/
-  - http://josf.info/blog/2014/03/21/getting-acquainted-with-clojure-zippers/
+- http://arnebrasseur.net/talks/2018-clojure-zip-denver
+- https://www.youtube.com/watch?v=5Nm56YvTKZY
+- https://www.ibm.com/developerworks/library/j-treevisit/j-treevisit-pdf.pdf
+- https://thomas-sojka.tech/how-to-grow-a-tree.html
+- https://blog.jakubholy.net/2019/briefly-internal-structure-of-clojure-zippers/
+- http://josf.info/blog/2014/03/21/getting-acquainted-with-clojure-zippers/
 
 * clojure.walk
-  - https://stackoverflow.com/questions/39768093/how-to-implement-walk-postwalk-traversal-using-clojure-zip
-  - https://juxt.pro/blog/idiomatic-integration
-  - https://lepovirta.org/posts/2017-03-07-html-search-and-replace-in-clojure.html
-  - https://200ok.ch/posts/using-clojure-to-visualize-dependencies-in-clojure-code.html
+- https://stackoverflow.com/questions/39768093/how-to-implement-walk-postwalk-traversal-using-clojure-zip
+- https://juxt.pro/blog/idiomatic-integration
+- https://lepovirta.org/posts/2017-03-07-html-search-and-replace-in-clojure.html
+- https://200ok.ch/posts/using-clojure-to-visualize-dependencies-in-clojure-code.html
 
 * inductive graph
-  - https://begriffs.com/posts/2015-09-04-pure-functional-graphs.html
-  - https://jelv.is/talks/inductive-graphs-at-wagon/
-  - https://web.engr.oregonstate.edu/~erwig/papers/InductiveGraphs_JFP01.pdf
+- https://begriffs.com/posts/2015-09-04-pure-functional-graphs.html
+- https://jelv.is/talks/inductive-graphs-at-wagon/
+- https://web.engr.oregonstate.edu/~erwig/papers/InductiveGraphs_JFP01.pdf
+
+* nil-punning
+- https://git.sr.ht/~ben/web/tree/master/clog/robust-clojure-nil.org
