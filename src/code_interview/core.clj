@@ -1,7 +1,7 @@
 (ns code-interview.core
   (:require
-    [clojure.spec.alpha :as s]
-    [expound.alpha :as expound]))
+   [clojure.spec.alpha :as s]
+   [expound.alpha :as expound]))
 
 
 (alter-var-root #'s/*explain-out* (constantly expound/printer))

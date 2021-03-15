@@ -1,12 +1,11 @@
 (ns code-interview.arrays-test
   (:require
-    [clojure.spec.alpha :as s]
-    [clojure.test :refer :all]
-    [clojure.test.check.clojure-test :refer [defspec]]
-    [clojure.test.check.generators :as gen]
-    [com.gfredericks.test.chuck.clojure-test :refer [for-all checking]]
-
-    [code-interview.arrays :as arrays]))
+   [clojure.spec.alpha :as s]
+   [clojure.test :refer :all]
+   [clojure.test.check.clojure-test :refer [defspec]]
+   [clojure.test.check.generators :as gen]
+   [code-interview.arrays :as arrays]
+   [com.gfredericks.test.chuck.clojure-test :refer [for-all checking]]))
 
 
 ;;;  Implement an algorithm to determine if a string has all unique characters.

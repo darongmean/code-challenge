@@ -2,12 +2,11 @@
   (:require
    [clojure.spec.alpha :as s]
    [clojure.test :refer :all]
-
-   [secret-hunter.core :refer :all]
-   [secret-hunter.secret-tree :refer :all]
-
    [expound.alpha :as expound]
-   [orchestra.spec.test :as st]))
+   [orchestra.spec.test :as st]
+   [secret-hunter.core :refer :all]
+   [secret-hunter.secret-tree :refer :all]))
+
 
 (s/check-asserts true)
 
@@ -35,6 +34,7 @@
    "6" {:depth 2 :id "6" :secret "c"}
    "8" {:depth 2 :id "8" :secret "d"}})
 
+
 (deftest pre-order-nodes-test
   (testing "traverse leaf node"
     (is (= ["3"] (pre-order-nodes test-tree ["3"])))
@@ -53,6 +53,7 @@
     (is (= (pre-order-nodes test-tree ["1"])
            (pre-order-nodes (mk-tree test-tree ["1"]) ["1"])))))
 
+
 (deftest join-secret-test
   (testing "traverse leaf node"
     (is (= "a" (join-secret test-tree ["3"]))))
@@ -60,6 +61,7 @@
     (is (= "c" (join-secret test-tree ["5" "6"]))))
   (testing "traverse node with more depths"
     (is (= "abcd" (join-secret test-tree ["1" "2" "3" "4" "5" "6" "7" "8"])))))
+
 
 (deftest code-challenge-answer
   (testing "use test API"

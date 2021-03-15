@@ -5,6 +5,7 @@
    [clojure.core.async :as async]
    [taoensso.timbre :as timbre]))
 
+
 (defn mk-rest-client
   ([base-url]
    (let [session (-> (http-client/get (str base-url "/get-session" {:as :auto}))

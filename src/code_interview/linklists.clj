@@ -21,7 +21,8 @@
     (map vector slow-runner fast-runner)))
 
 
-(defn- verify-palindrome [{:keys [head tail]}]
+(defn- verify-palindrome
+  [{:keys [head tail]}]
   (every? true? (map = head tail)))
 
 
@@ -30,30 +31,35 @@
   :head a collection of element from the start to the middle(exclude middle if the length is odd)
   :tail a collection of element from the end to the middle(include middle if the length is odd)"
   [coll]
-  (let [conj-head-or-tail (fn [acc [x y]] (if (nil? y)
-                                            (update acc :tail conj x)
-                                            (update acc :head conj x)))]
+  (let [conj-head-or-tail (fn [acc [x y]]
+                            (if (nil? y)
+                              (update acc :tail conj x)
+                              (update acc :head conj x)))]
     (reduce conj-head-or-tail {:head [] :tail (list)} coll)))
 
 
-(defn palindrome? [coll]
+(defn palindrome?
+  [coll]
   (-> coll
       (slow-fast-pair)
       (collect-head-and-tail)
       (verify-palindrome)))
 
 
-(defn- steps-until-loop-collision-point [slow fast]
+(defn- steps-until-loop-collision-point
+  [slow fast]
   (let [k (count (take-while false? (map = slow fast)))]
     [(inc k) (take (inc k) slow)]))
 
 
-(defn- find-circular-point [points points-in-loop]
+(defn- find-circular-point
+  [points points-in-loop]
   (let [k (count (take-while false? (map = points points-in-loop)))]
     (first (drop k points-in-loop))))
 
 
-(defn circular-point [head linkedlist]
+(defn circular-point
+  [head linkedlist]
   (let [slow-walk-list (take-while (complement nil?) (iterate linkedlist head))
         fast-walk-list (take-nth 2 (drop 1 (iterate linkedlist head)))
         [step no-loop] (steps-until-loop-collision-point slow-walk-list fast-walk-list)]
