@@ -13,5 +13,5 @@
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.732"}
                                orchestra/orchestra {:mvn/version "2021.01.01-1"}
-                               com.gfredericks/test.chuck {:mvn/version "0.2.10"}}
-                  :main-opts ["-m" "kaocha.runner"]}}}
+                               com.gfredericks/test.chuck {:mvn/version "0.2.10"}}}
+           :kaocha {:main-opts ["-m" "kaocha.runner"]}}}
