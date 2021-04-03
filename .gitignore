@@ -6,3 +6,4 @@ tmp/
 .hgignore
 .nrepl-port
 .lsp
+*.iml
