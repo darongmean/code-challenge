@@ -1,6 +1,6 @@
 (ns code-interview.two-strings-test
   (:require
-    [clojure.test :refer [deftest is]]))
+   [clojure.test :refer [deftest is]]))
 
 
 ;; See https://www.hackerrank.com/challenges/two-strings/problem
