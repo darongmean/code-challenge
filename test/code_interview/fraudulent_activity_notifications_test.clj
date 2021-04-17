@@ -5,19 +5,28 @@
 
 
 ;; See https://www.hackerrank.com/challenges/fraudulent-activity-notifications/problem
-;; TODO: fix timeout error
+
 
 (defn nth-counting-sort
-  [counting-sort-map index]
-  (let [index-elem-pair (fn [{:keys [i] :as acc} [elem elem-freq]]
-                          (if (<= i index)
-                            (-> acc
-                                (update :i + elem-freq)
-                                (assoc :elem elem))
-                            (reduced acc)))]
-    (->> counting-sort-map
-         (reduce index-elem-pair {:i 0 :elem nil})
-         :elem)))
+  [counting-sort-map low high]
+  (let [index-elem-pair (fn [^clojure.lang.Indexed acc ^clojure.lang.Indexed pair]
+                          ;; Use (.nth ^Indexed pair ...) improve performance by reducing the overall
+                          ;; time from 6000 ms to 3000 ms.
+                          (let [element (.nth pair 0)
+                                element-frequency (.nth pair 1)
+                                index-low (.nth acc 0)
+                                element-low (.nth acc 1)
+                                index-high (.nth acc 2)]
+                            (cond
+                              (<= index-low low)
+                              [(+ index-low element-frequency) element
+                               (+ index-high element-frequency) element]
+                              (<= index-high high)
+                              [index-low element-low
+                               (+ index-high element-frequency) element]
+                              :else
+                              (reduced acc))))]
+    (reduce index-elem-pair [0 nil 0 nil] counting-sort-map)))
 
 
 (defn decrement
@@ -34,13 +43,13 @@
 (defn median
   [expenditure-counting-sort length]
   (let [mid (Math/floorDiv (long length) (long 2))
-        low mid
-        high (inc mid)]
-    (if (even? length)
-      (/ (+ (nth-counting-sort expenditure-counting-sort low)
-            (nth-counting-sort expenditure-counting-sort high))
-         2)
-      (nth-counting-sort expenditure-counting-sort mid))))
+        high mid
+        low (if (even? length)
+              (decrement mid)
+              mid)
+        [_ exp-low _ exp-high] (nth-counting-sort expenditure-counting-sort low high)]
+    (/ (+ exp-low exp-high)
+       2)))
 
 
 (defn notification-count
@@ -79,7 +88,15 @@
   (is (= 1 (activity-notifications [10 20 30 40 50] 3)))
   (is (= 0 (activity-notifications [1 2 3 4 4] 4)))
   (is (= 2 (activity-notifications [2 3 4 2 3 6 8 4 5] 5)))
-  (testing "it could handle big number"
+  (testing "it could handle even big number"
+    (let [input (-> "test/code_interview/fraudulent_activity_notifications_input01.txt"
+                    (slurp)
+                    (str/split-lines)
+                    (last)
+                    (str/split #" ")
+                    (->> (map #(Long/parseLong %))))]
+      (is (= 633 (activity-notifications input 10000)))))
+  (testing "it could handle odd big number"
     (let [input (-> "test/code_interview/fraudulent_activity_notifications_input05.txt"
                     (slurp)
                     (str/split-lines)
@@ -87,3 +104,20 @@
                     (str/split #" ")
                     (->> (map #(Long/parseLong %))))]
       (is (= 926 (activity-notifications input 40001))))))
+
+
+(comment
+ (def input (-> "test/code_interview/fraudulent_activity_notifications_input05.txt"
+                (slurp)
+                (str/split-lines)
+                (last)
+                (str/split #" ")
+                (->> (map #(Long/parseLong %)))))
+
+ (time (activity-notifications input 10000))
+
+ (require '[clj-async-profiler.core :as prof])
+ (prof/serve-files 8080)
+
+ (prof/profile (dotimes [_ 100] (activity-notifications input 40001)))
+ (prof/profile {:event :alloc} (dotimes [_ 100] (activity-notifications input 40001))))

@@ -10,7 +10,9 @@
         ch.qos.logback/logback-classic {:mvn/version "1.2.3"}
         ;; end timbre
         expound/expound {:mvn/version "0.8.9"}}
- :aliases {:test {:extra-paths ["test"]
+ :aliases {:clj-async-profiler {:extra-deps {com.clojure-goes-fast/clj-async-profiler {:mvn/version "RELEASE"}}
+                                :jvm-opts ["-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"]}
+           :test {:extra-paths ["test"]
                   :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.732"}
                                orchestra/orchestra {:mvn/version "2021.01.01-1"}
                                com.gfredericks/test.chuck {:mvn/version "0.2.10"}}}
