@@ -36,3 +36,7 @@ commit-msg:
   commands:
     commitlint:
       run: 'cat {1} | npx-commitlint'
+pre-push:
+  commands:
+    kaocha:
+      run: 'clojure -M:test:kaocha'
